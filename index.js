@@ -1,22 +1,11 @@
-const ukrainian = [
-  'Й','й','Ц','ц','У','у','К','к','Е','е','Н','н','Г','г','Ш','ш','Щ','щ','З','з','Х','х','Ї','ї',
-  'Ф','ф','І','і','В','в','А','а','П','п','Р','р','О','о','Л','л','Д','д','Ж','ж','Є','є',
-  'Я','я','Ч','ч','С','с','М','м','И','и','Т','т','Ь','ь','Б','б','Ю','ю',',','.',
-  ]
-const english = [
-  'Q','q','W','w','E','e','R','r','T','t','Y','y','U','u','I','i','O','o','P','p','{','[','}',']',
-  'A','a','S','s','D','d','F','f','G','g','H','h','J','j','K','k','L','l',':',';','"',"'",
-  'Z','z','X','x','C','c','V','v','B','b','N','n','M','m','<',',','>','.','?','/',
-  ]
+const ukrainian = `ЙйЦцУуКкЕеНнГгШшЩщЗзХхЇїФфІіВвАаПпРрОоЛлДдЖжЄєЯяЧчСсМмИиТтЬьБбЮю,.`
+const russian   = `ЙйЦцУуКкЕеНнГгШшЩщЗзХхЪъФфЫыВвАаПпРрОоЛлДдЖжЄєЯяЧчСсМмИиТтЬьБбЮю,.`
+const english   = `QqWwEeRrTtYyUuIiOoPp{[}]AaSsDdFfGgHhJjKkLl:;"'ZzXxCcVvBbNnMm<,>.?/`
 
 function fixGibberish(string, from = english, to = ukrainian) {
   let result = [];
   for (let i = 0; i < string.trim().split('').length; i++) {
     switch (string.trim().split('')[i]) {
-      case ' ': {
-        result[i] = ' ';
-        break;
-      }
       case from[0]: {
         result[i] = to[0];
         break;
@@ -290,12 +279,12 @@ function fixGibberish(string, from = english, to = ukrainian) {
       //   break;
       // }
       default:
-        result[i] = '_';
+        result[i] = string.trim().split('')[i];
         break;
     }
   }
   return result.join('');
 }
 
-// console.log(fixGibberish(`qwerttyuiop[]asdfghjkl;'zxcvbnm,.? QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>?`))
+// console.log(fixGibberish(`qwerttyuiop[]asdfghjkl;'zxcvbnm,.? QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>?`, english, ukrainian))
 // console.log(fixGibberish(`йцукеенгшщзхїфівапролджєячсмитьбю, ЙЦУКЕНГШЩЗХЇФІВАПРОЛДЖЄЯЧСМИТЬБЮ,`, ukrainian, english))
